@@ -1,0 +1,14 @@
+---
+layout: post
+title: "Erlang User Conference 2013"
+date: 2013-04-29 13:35
+comments: true
+categories: erlang, conferences
+---
+
+<div style="text-align:center">
+     <a href="http://www.erlang-factory.com/conference/ErlangUserConference2013" target="_blank"><img src="/images/seeyouthere.jpg" alt="EUC 2013" /></a>
+</div>
+<br />
+Hej, hej! I will be training at the Erlang User Conference 2013 in Stockholm, Sweden.<br />
+Looking forward to see you all there.
