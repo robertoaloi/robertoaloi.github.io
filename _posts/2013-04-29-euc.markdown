@@ -3,7 +3,7 @@ layout: post
 title: "Erlang User Conference 2013"
 date: 2013-04-29 13:35
 comments: true
-categories: erlang, conferences
+categories: erlang
 ---
 
 <div style="text-align:center">

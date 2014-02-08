@@ -2,7 +2,7 @@
 layout: post
 title: "Emacs Tips and Tricks"
 date: 2009-02-19 00:00
-categories: [emacs]
+categories: emacs
 comments: true
 ---
 

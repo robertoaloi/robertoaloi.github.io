@@ -3,7 +3,7 @@ layout: post
 title: "Erlang Workshop in Rome, Italy"
 date: 2013-02-26 12:43
 comments: true
-categories: erlang, codemotion, training
+categories: erlang
 ---
 
 <div style="text-align:center">

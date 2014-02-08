@@ -3,7 +3,7 @@ layout: post
 title: "How to Checkout GitHub Pull Requests Locally"
 date: 2012-11-12 10:36
 comments: true
-categories: [git, github, productivity]
+categories: git
 ---
 
 I've recently bumped into the following useful <a href="https://gist.github.com/3342247" target="_blank">gist</a>, which I decided to share with all of you.

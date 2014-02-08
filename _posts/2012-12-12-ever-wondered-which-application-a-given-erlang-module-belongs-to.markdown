@@ -3,7 +3,7 @@ layout: post
 title: "Ever wondered which application a given Erlang module belongs to?"
 date: 2012-12-12 16:12
 comments: true
-categories: erlang, productivity
+categories: erlang
 ---
 For example, wouldn't it be awesome to have the following:
 

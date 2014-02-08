@@ -3,7 +3,7 @@ layout: post
 title: "Codemotion Venice 2012: Erlang and the Cloud"
 date: 2012-11-15 11:09
 comments: true
-categories: codemotion, erlang, conferences
+categories: erlang
 ---
 
 <div style="text-align:center">
