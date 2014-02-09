@@ -231,7 +231,7 @@ pre {
   line-height: 24px;
 }
 .super {
-  font-size: 60px;
+  font-size: 42px;
   font-weight: bold;
   line-height: 1;
 }
@@ -240,7 +240,7 @@ pre {
   line-height: 1.5em;
 }
 .hyper {
-  font-size: 72px;
+  font-size: 48px;
   font-weight: bold;
   text-align: center;
   line-height: 1;
@@ -292,7 +292,7 @@ pre {
     left: 0;
   }
   .super {
-    font-size: 48px;
+    font-size: 42px;
     text-align: center;
   }
   .super small {
