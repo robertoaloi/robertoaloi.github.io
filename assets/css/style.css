@@ -446,7 +446,7 @@ html {
   width: 100%;
   height: 60%;
   padding: 24px 0;
-  margin-bottom: 72px;
+  margin-bottom: 36px;
   box-sizing: border-box;
 }
 #masthead.align-left {
@@ -507,8 +507,8 @@ html {
 /* -- Post Tags -- */
 /* -  Post Body - */
 .post-body {
-  padding-bottom: 72px;
-  margin-bottom: 72px;
+  padding-bottom: 36px;
+  margin-bottom: 36px;
 }
 .post-template .post-body {
   padding-bottom: 36px;
@@ -528,11 +528,11 @@ html {
 }
 /* - Post Share - */
 .post-share {
-  margin-bottom: 48px;
+  margin-bottom: 24px;
 }
 /* - Post Author - */
 .post-author {
-  margin-bottom: 72px;
+  margin-bottom: 36px;
 }
 .post-author h4 {
   margin-top: 0;
@@ -571,8 +571,8 @@ html {
 /* FOOTER */
 /* ------ */
 #footer {
-  margin-top: 72px;
-  padding: 124px 0 72px;
+  margin-top: 36px;
+  padding: 124px 0 36px;
   position: relative;
   width: 100%;
   height: 60%;
