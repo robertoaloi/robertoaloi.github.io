@@ -7,6 +7,7 @@ modified    : 2014-02-09
 category    : erlang
 tags        : [erlang, rebar, devrel, productivity]
 image       :
+  feature: bg_06.jpg
 comments    : true
 ---
 

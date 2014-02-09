@@ -7,6 +7,7 @@ modified    : 2014-02-08
 category    : erlang
 tags        : [erlang, ssh]
 image       :
+  feature: bg_05.jpg
 comments    : true
 ---
 

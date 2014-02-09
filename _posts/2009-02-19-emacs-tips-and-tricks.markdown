@@ -7,6 +7,7 @@ modified    : 2009-02-19
 category    : emacs
 tags        : []
 image       :
+  feature: bg_01.jpg
 comments    : true
 ---
 

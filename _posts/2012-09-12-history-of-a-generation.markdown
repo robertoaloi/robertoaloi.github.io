@@ -7,6 +7,7 @@ modified    : 2012-09-12
 category    : italy
 tags        : []
 image       :
+  feature: bg_03.jpg
 comments    : true
 ---
 

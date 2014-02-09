@@ -7,6 +7,7 @@ modified    : 2012-11-12
 category    : git
 tags        : []
 image       :
+  feature: bg_04.jpg
 comments    : true
 ---
 
