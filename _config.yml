@@ -48,14 +48,18 @@ links:
     url: /
     external: false
     icon: home
-  - title: <i class="icon-book"></i> Documentation
-    url: /documentation
+  - title: tryerlang.org
+    url: http://tryerlang.org
+    external : true
+  - title: Languages in the World
+    url: http://roberto-aloi.com/languagesintheworld
+    external: true
   - title: Categories
     url: /categories
-  - title: Tags
-    url: /tags
-  - title: Roberto who?
-    url: /roberto
+#  - title: Tags
+#    url: /tags
+#  - title: Roberto who?
+#    url: /roberto
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    America/New_York
