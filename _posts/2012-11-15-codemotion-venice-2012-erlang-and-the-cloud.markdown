@@ -7,6 +7,7 @@ modified    : 2012-11-15
 category    : erlang
 tags        : []
 image       :
+  feature: bg_05.jpg
 comments    : true
 ---
 

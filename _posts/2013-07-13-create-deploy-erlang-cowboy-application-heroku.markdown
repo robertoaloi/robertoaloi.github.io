@@ -7,6 +7,7 @@ modified    : 2013-07-13
 category    : erlang
 tags        : [erlang, heroku]
 image       :
+  feature: bg_10.jpg
 comments    : true
 ---
 
