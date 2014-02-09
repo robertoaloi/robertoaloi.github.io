@@ -5,7 +5,7 @@ description :
 headline    :
 modified    : 2013-07-13
 category    : erlang
-tags        : []
+tags        : [erlang, heroku]
 image       :
 comments    : true
 ---
@@ -42,68 +42,71 @@ In this post, we will write an Erlang/Cowboy Web Application from scratch, deplo
 * [Profile your deployed Erlang application](#profile)
 
 <a id="rebar"></a>
+
 ### Create the skeleton of an Erlang app using Rebar
 
 [Rebar](https://github.com/rebar/rebar) is the de-facto standard build-tool for Erlang projects.
 
 Fetch rebar from Github and bootstrap it:
 
-<pre>
+{% highlight bash %}
 $ git clone https://github.com/rebar/rebar.git
 $ cd rebar
 $ ./bootstrap
 $ cd ..
-</pre>
+{% endhighlight %}
 
 Initialize a new git repository and use rebar to create the skeleton for a new Erlang app. I decided to call my application *erlblog*. Call your application differently, replacing every occurrence of *erlblog* with your favourite application name in the instructions below. Please note that this is **not** optional, since two applications cannot have the same name on Heroku and you don't dare to clash with my own application.
 
-<pre>
+{% highlight bash %}
 $ git init erlblog
 $ cd erlblog
 $ cp ../rebar/rebar .
 $ ./rebar create-app appid=erlblog
-</pre>
+{% endhighlight %}
 
 Commit what you have done in git:
 
-<pre>
+{% highlight bash %}
 $ git add rebar src
 $ git commit -m "Add rebar skeleton"
-</pre>
+{% endhighlight %}
 
 <a id="heroku"></a>
+
 ### Create a Heroku application
 
 Login into Heroku using the *heroku* command from the terminal.
 
-<pre>
+{% highlight bash %}
 $ heroku login
-</pre>
+{% endhighlight %}
 
 Use your Heroku email and password to login.
 
 Now create a new Heroku app, using the Erlang buildpack from [@archaelus](https://github.com/archaelus):
 
-<pre>
+{% highlight bash %}
 $ heroku create erlblog --stack cedar --buildpack https://github.com/archaelus/heroku-buildpack-erlang
-</pre>
+{% endhighlight %}
 
 <a id="cowboy"></a>
+
 ### Use Cowboy to create a simple web app
 
 Add the *Cowboy* web server as a rebar dependency:
 
-<pre>
+{% highlight erlang %}
 $ cat rebar.config
 
 {deps, [
         {cowboy, "0.8.4", {git, "https://github.com/extend/cowboy.git", {tag, "0.8.4"}}}
        ]}.
-</pre>
+{% endhighlight %}
 
 Add *cowboy* to the list of applications in your **.app.src** file. Also, set the *http_port* environment variable to *8080* (see next paragraphs).
 
-<pre>
+{% highlight erlang %}
 $ cat src/erlblog.app.src
 
 {application, erlblog,
@@ -119,13 +122,13 @@ $ cat src/erlblog.app.src
   {mod, { erlblog_app, []}},
   {env, [{http_port, 8080}]}
  ]}.
-</pre>
+{% endhighlight %}
 
 Modify the **start/2** function from the **erlblog_app** module so that Cowboy starts a pool of acceptors when the erlblog application is started. Configure the Cowboy dispatcher with a single dispatching rule, routing all requests to **'/'** to the **erlblog_handler** (see below).
 
 Heroku assigns random ports to your application and uses the OS environment variable *$PORT* to inform you about the port on which your web server should listen to. Therefore, in the following code we read that environment variable, defaulting to port 8080 in case the environment variable is not specified. This is useful, for example, if you want to try your web server locally before deploying it on Heroku.
 
-<pre>
+{% highlight erlang %}
 $ cat src/erlblog_app.erl
 
 -module(erlblog_app).
@@ -170,11 +173,11 @@ port() ->
         Other ->
             list_to_integer(Other)
     end.
-</pre>
+{% endhighlight %}
 
 Let's now implement a basic HTTP Cowboy handler, which simply replies with a 200 status code and a notorious welcoming message to any incoming request:
 
-<pre>
+{% highlight erlang %}
 $ cat src/erlblog_handler.erl
 
 -module(erlblog_handler).
@@ -192,11 +195,11 @@ handle(Req, State) ->
 
 terminate(_Reason, _Req, _State) ->
     ok.
-</pre>
+{% endhighlight %}
 
 Finally, let's create an interface module which will be responsible for starting your *erlblog* application together with all its dependencies.
 
-<pre>
+{% highlight erlang %}
 $ cat src/erlblog.erl
 
 -module(erlblog).
@@ -208,36 +211,37 @@ start() ->
     ok = application:start(ranch),
     ok = application:start(cowboy),
     ok = application:start(erlblog).
-</pre>
+{% endhighlight %}
 
 <a id="compile"></a>
+
 ### Compile and run your application locally
 
 Compile the *erlblog* application using rebar:
 
-<pre>
+{% highlight bash %}
 $ ./rebar get-deps compile
-</pre>
+{% endhighlight %}
 
 Start the application and verify that everything works as expected:
 
-<pre>
+{% highlight bash %}
 $ erl -pa ebin deps/*/ebin -s erlblog
-</pre>
+{% endhighlight %}
 
 From the Erlang shell, type:
 
-<pre>
+{% highlight erlang %}
 1> application:which_applications().
-</pre>
+{% endhighlight %}
 
 The erlblog application should be included in the output.
 
 Finally, point your browser to:
 
-<pre>
+{% highlight bash %}
 http://localhost:8080
-</pre>
+{% endhighlight %}
 
 And verify that the string *"Hello World!"* is there.
 
@@ -245,73 +249,76 @@ You can use **Ctrl-G q** to exit the Erlang shell.
 
 If everything works as expected, commit everything to git:
 
-<pre>
+{% highlight bash %}
 $ git add rebar.config src
 git ci -m "Include Cowboy skeleton"
-</pre>
+{% endhighlight %}
 
 <a id="config"></a>
+
 ### Configure your Heroku app
 
 You need to tell Heroku that you're going to deploy an Erlang Application. To do so, you need to create a *Procfile* file, containing your start-up script:
 
-<pre>
+{% highlight bash %}
 $ cat Procfile
 
 web: erl -pa ebin deps/*/ebin -noshell -noinput -s erlblog
-</pre>
+{% endhighlight %}
 
 Commit your changes to git:
 
-<pre>
+{% highlight bash %}
 $ git add Procfile
 $ git ci -m "Add Procfile"
-</pre>
+{% endhighlight %}
 
 You also want to specify that your application requires Erlang R15B01:
 
-<pre>
+{% highlight bash %}
 $ cat .preferred_otp_version
 
 OTP_R15B01
-</pre>
+{% endhighlight %}
 
 Commit your changes to git:
 
-<pre>
+{% highlight bash %}
 $ git add .preferred_otp_version
 $ git ci -m "Specify R15B01 as Erlang version"
-</pre>
+{% endhighlight %}
 
 <a id="deploy"></a>
+
 ### Deploy your Erlang application on Heroku
 
 That's the beautiful part:
 
-<pre>
+{% highlight bash %}
 $ git push heroku master
-</pre>
+{% endhighlight %}
 
 You should now be able to access the erlblog application at:
 
-<pre>
+{% highlight bash %}
 http://erlblog.herokuapp.com
-</pre>
+{% endhighlight %}
 
 If something does not work as expected, you might want to verify the logs for your Heroku app:
 
-<pre>
+{% highlight bash %}
 $ heroku logs
-</pre>
+{% endhighlight %}
 
 <a id="profile"></a>
+
 ### Profile your deployed Erlang application
 
 Let's now verify how many requests our erlblog application can handle. Please note that to run the steps below, you need [ab](http://httpd.apache.org/docs/2.2/programs/ab.html) and [gnuplot](http://www.gnuplot.info/) installed on your machine.
 
 Using ApacheBench, perform 5000 HTTP requests against your new web server, using 20 concurrent requests. Store the output in the *gnuplot.dat* file.
 
-<pre>
+{% highlight bash %}
 $ ab -n 5000 -c 20 -g gnuplot.dat http://erlblog.herokuapp.com/
 
 This is ApacheBench, Version 2.3 <$Revision: 655654 $>
@@ -368,17 +375,17 @@ Percentage of the requests served within a certain time (ms)
   98%    441
   99%    617
  100%   1495 (longest request)
-</pre>
+{% endhighlight %}
 
 Using our Heroku free tier (1 single dyno worker), our Cowboy Web Server managed to complete all **5000 requests**, allowing **~70 requests per second**. 90% of the requests have been served in about **300 ms**. Of course, such a good result has been possible only because we surely have been hitting some kind of cache in the Heroku servers. Still, not bad for a free hosting solution for a simple Erlang applications.
 
 We can visualize the above results using Gnuplot:
 
-<pre>
+{% highlight bash %}
 $ gnuplot
 
 gnuplot> plot "gnuplot.dat" using 9 smooth sbezier with lines title "Cowboy Heroku Benchmarking"
-</pre>
+{% endhighlight %}
 
 <div style="text-align:center">
   <img src="/images/gnuplot.png" alt="Gnuplot" /></a>
