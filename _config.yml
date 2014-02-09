@@ -13,8 +13,7 @@ animated_fins:	  true
 # Specify the fin color in RGB value
 fin_color:        "255,255,255"
 # Change url to your domain. Leave localhost server or blank when working locally.
-# url:              http://roberto-aloi.com
-url: http://localhost:4000
+url:              http://roberto-aloi.com
 
 # Owner/author information
 owner:
