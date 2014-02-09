@@ -19,7 +19,8 @@ you might find helpful.
 Remember that if you want to kill all Erlang nodes running on a
 system rather than a specific one, you can simply do:
 
-
-````
+{% highlight bash %}
+{% raw %}
 killall beam.smp
-````
+{% endraw %}
+{% endhighlight %}
