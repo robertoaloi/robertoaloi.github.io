@@ -1,9 +1,13 @@
 ---
-layout: post
-title: "Create and deploy your Erlang / Cowboy Application on Heroku in 30 minutes"
-date: 2013-07-13 22:25
-comments: true
-categories: erlang
+layout      : post
+title       : "Create and deploy your Erlang / Cowboy Application on Heroku in 30 minutes"
+description :
+headline    :
+modified    : 2013-07-13
+category    : erlang
+tags        : []
+image       :
+comments    : true
 ---
 
 <div style="text-align:center">

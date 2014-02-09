@@ -1,7 +1,13 @@
 ---
-layout     : post
-title      : Killin' them softly (by name)
-categories : erlang
+layout      : post
+title       : "Killin' them softly (by name)"
+description :
+headline    :
+modified    : 2014-02-08
+category    : erlang
+tags        : []
+image       :
+comments    : true
 ---
 
 Sometimes is useful to kill an Erlang node by name.

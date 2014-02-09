@@ -1,7 +1,13 @@
 ---
-layout     : post
-title      : "Welcome to the World of Erlang SSH"
-categories : erlang
+layout      : post
+title       : "Welcome to the World of Erlang SSH"
+description :
+headline    :
+modified    : 2014-02-08
+category    : erlang
+tags        : []
+image       :
+comments    : true
 ---
 
 I've been playing around with the Erlang SSH application lately and I've

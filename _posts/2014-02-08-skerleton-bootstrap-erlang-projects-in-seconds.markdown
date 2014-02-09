@@ -1,7 +1,13 @@
 ---
-layout     : post
-title      : "Skerleton: bootstrap Erlang Projects in Seconds"
-categories : erlang
+layout      : post
+title       : "Skerleton: bootstrap Erlang Projects in Seconds"
+description :
+headline    :
+modified    : 2014-02-08
+category    : erlang
+tags        : []
+image       :
+comments    : true
 ---
 
 Every time you create a brand-new Erlang project, some manual steps

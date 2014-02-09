@@ -1,9 +1,13 @@
 ---
-layout: post
-title: "Erlang Workshop in Rome, Italy"
-date: 2013-02-26 12:43
-comments: true
-categories: erlang
+layout      : post
+title       : "Erlang Workshop in Rome, Italy"
+description :
+headline    :
+modified    : 2013-02-26
+category    : erlang
+tags        : []
+image       :
+comments    : true
 ---
 
 <div style="text-align:center">

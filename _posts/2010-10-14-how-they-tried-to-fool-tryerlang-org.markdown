@@ -1,9 +1,13 @@
 ---
-layout: post
-title: "How they tried to fool tryerlang.org"
-date: 2010-10-14 00:00
-categories: erlang
-comments: true
+layout      : post
+title       : "How they tried to fool tryerlang.org"
+description :
+headline    :
+modified    : 2010-10-14
+category    : erlang
+tags        : []
+image       :
+comments    : true
 ---
 
 <h2>Preface</h2>

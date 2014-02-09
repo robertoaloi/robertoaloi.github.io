@@ -1,7 +1,13 @@
 ---
-layout     : post
-title      : "Rebar and the Developer Shell"
-categories : erlang
+layout      : post
+title       : "Rebar and the Developer Shell"
+description :
+headline    :
+modified    : 2014-02-09
+category    : erlang
+tags        : []
+image       :
+comments    : true
 ---
 
 In some cases (e.g. during development) it is helpful to symlink
