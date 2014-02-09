@@ -19,7 +19,7 @@ url: http://localhost:4000
 # Owner/author information
 owner:
   name:           Roberto Aloi
-  avatar:         hmfaysal.jpg
+  avatar:         roberto-aloi.png
   email:          xxx@gmail.com
   # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
   description:    Roberto Aloi...
