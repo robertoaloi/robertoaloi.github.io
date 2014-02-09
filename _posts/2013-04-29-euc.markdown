@@ -1,9 +1,13 @@
 ---
-layout: post
-title: "Erlang User Conference 2013"
-date: 2013-04-29 13:35
-comments: true
-categories: erlang
+layout      : post
+title       : "Erlang User Conference 2013"
+description :
+headline    :
+modified    : 2013-04-29
+category    : erlang
+tags        : []
+image       :
+comments    : true
 ---
 
 <div style="text-align:center">

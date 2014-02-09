@@ -1,9 +1,13 @@
 ---
-layout: post
-title: "Codemotion Venice 2012: Erlang and the Cloud"
-date: 2012-11-15 11:09
-comments: true
-categories: erlang
+layout      : post
+title       : "Codemotion Venice 2012: Erlang and the Cloud"
+description :
+headline    :
+modified    : 2012-11-15
+category    : erlang
+tags        : []
+image       :
+comments    : true
 ---
 
 <div style="text-align:center">

@@ -1,10 +1,15 @@
 ---
-layout: post
-title: "Ever wondered which application a given Erlang module belongs to?"
-date: 2012-12-12 16:12
-comments: true
-categories: erlang
+layout      : post
+title       : "Ever wondered which application a given Erlang module belongs to?"
+description :
+headline    :
+modified    : 2012-12-12
+category    : erlang
+tags        : []
+image       :
+comments    : true
 ---
+
 For example, wouldn't it be awesome to have the following:
 
     ./efind.sh cover

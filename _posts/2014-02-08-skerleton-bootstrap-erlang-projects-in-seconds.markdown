@@ -1,7 +1,13 @@
 ---
-layout     : post
-title      : "Skerleton: bootstrap Erlang Projects in Seconds"
-categories : erlang
+layout      : post
+title       : "Skerleton: bootstrap Erlang Projects in Seconds"
+description :
+headline    :
+modified    : 2014-02-08
+category    : erlang
+tags        : []
+image       :
+comments    : true
 ---
 
 Every time you create a brand-new Erlang project, some manual steps
@@ -18,23 +24,23 @@ to use skerleton. You can find the skerleton source code on
 
 ### Create a new project based on skerleton and bootstrap it
 
-````
+{% highlight bash %}
 git clone https://github.com/robertoaloi/skerleton.git my_app
 cd my_app
 ./bootstrap.sh
-````
+{% endhighlight %}
 
 ### Remove the skerleton left-overs and you are ready to go
 
-````
+{% highlight bash %}
 rm -rf bootstrap.sh README.md .git rel/reltool.config.template
 git init
 git add . && git commit -a -m "Initial commit."
-````
+{% endhighlight %}
 
 ### start your Erlang node
 
-````
+{% highlight bash %}
 make rel
 rel/my_app/bin/my_app console
-````
+{% endhighlight %}

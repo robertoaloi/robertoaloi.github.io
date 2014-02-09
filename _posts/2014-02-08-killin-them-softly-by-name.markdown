@@ -1,7 +1,13 @@
 ---
-layout     : post
-title      : Killin' them softly (by name)
-categories : erlang
+layout      : post
+title       : "Killin' them softly (by name)"
+description :
+headline    :
+modified    : 2014-02-08
+category    : erlang
+tags        : []
+image       :
+comments    : true
 ---
 
 Sometimes is useful to kill an Erlang node by name.
@@ -13,7 +19,8 @@ you might find helpful.
 Remember that if you want to kill all Erlang nodes running on a
 system rather than a specific one, you can simply do:
 
-
-````
+{% highlight bash %}
+{% raw %}
 killall beam.smp
-````
+{% endraw %}
+{% endhighlight %}

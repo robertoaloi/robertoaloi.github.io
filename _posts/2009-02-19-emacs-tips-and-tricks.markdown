@@ -1,9 +1,13 @@
 ---
-layout: post
-title: "Emacs Tips and Tricks"
-date: 2009-02-19 00:00
-categories: emacs
-comments: true
+layout      : post
+title       : "Emacs Tips and Tricks"
+description :
+headline    :
+modified    : 2009-02-19
+category    : emacs
+tags        : []
+image       :
+comments    : true
 ---
 
 In this blog post I collect some miscellaneous Emacs tips and tricks.

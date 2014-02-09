@@ -1,3 +1,90 @@
-name: Roberto Aloi
-markdown: redcarpet
-pygments: true
+title:            Roberto Aloi
+description:      "Software Engineer, Erlang Passionate, Father."
+logo:             omikron.png
+disqus_shortname: robertoaloi
+# Assign a default image for your site's header and footer
+default_bg:       default_bg.jpg
+search:           true
+share:            true
+# Read Time is a calculator tp provide post read-time based on word count. Usage is recommended.
+readtime:         true
+# Turn on or off the fin animations in the header and footer
+animated_fins:	  true
+# Specify the fin color in RGB value
+fin_color:        "255,255,255"
+# Change url to your domain. Leave localhost server or blank when working locally.
+# url:              http://roberto-aloi.com
+url: http://localhost:4000
+
+# Owner/author information
+owner:
+  name:           Roberto Aloi
+  avatar:         roberto-aloi.png
+  email:          xxx@gmail.com
+  # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
+  description:    Roberto Aloi...
+  twitter:        robertoaloi
+  facebook:       aloiroberto
+  github:         robertoaloi
+  stackexchange:  https://stackexchange.com/users/3402032/hossain-mohd-faysal
+  linkedin:       http://linkedin.com/in/robertoaloi
+#  instagram:
+  flickr:         roberto-aloi
+#  tumblr:
+#  hmfaysalsocial:
+  # For Google Authorship https://plus.google.com/authorship
+  google_plus:    https://plus.google.com/+RobertoAloi/posts
+
+# Analytics and webmaster tools stuff goes here
+google_analytics:   UA-24052324-1
+google_verify:
+# https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
+bing_verify:
+
+# Links to include in top navigation
+# For external links add external: true
+links:
+  - title: Home
+    url: /
+    external: false
+    icon: home
+  - title: tryerlang.org
+    url: http://tryerlang.org
+    external : true
+  - title: Languages in the World
+    url: http://roberto-aloi.com/languagesintheworld
+    external: true
+  - title: Categories
+    url: /categories
+#  - title: Tags
+#    url: /tags
+#  - title: Roberto who?
+#    url: /roberto
+
+# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone:    America/New_York
+future:      true
+pygments:    true
+markdown:    kramdown
+paginate:    6
+paginate_path: "page:num"
+
+# https://github.com/mojombo/jekyll/wiki/Permalinks
+permalink:   /:categories/:title
+
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  use_coderay: false
+
+  coderay:
+    coderay_line_numbers: 
+    coderay_line_numbers_start: 1
+    coderay_tab_width: 4
+    coderay_bold_every: 10
+    coderay_css: class
+
+include: [".htaccess"]
+exclude: ["lib", "config.rb", "Gemfile", "Capfile", "Gemfile.lock", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]
