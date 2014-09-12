@@ -30,20 +30,20 @@ One way of doing this is to pair
 each element of the list with a boolean generator and to filter out
 _false_ values:
 
-```
+{% highlight erlang %}
 sublist(L0) ->
   ?LET(L, [{E, eqc_gen:bool()} || E <- L0], [X || {X, true} <- L]).
-```
+{% endhighlight %}
 
 Since the boolean generator shrinks towards the _false_ value, your sublist will shrink towards the empty list, which is
 what you want in most cases. If you want to invert this behaviour and
 you want to shrink - or I should say to grow - towards the entire list, you can
 simply toggle the _true_ boolean and set it to _false_:
 
-```
+{% highlight erlang %}
 sublist(L0) ->
   ?LET(L, [{E, eqc_gen:bool()} || E <- L0], [X || {X, false} <- L]).
-```
+{% endhighlight %}
 
 ### Use `elements/1` or `oneof/1`?
 
@@ -65,7 +65,7 @@ Whenever you implement a new generator or even if you simply use one of the buil
 ones, you may want to verify that the generator works as you expect.
 You can use `eqc_gen:sample/1` for the purpose.
 
-```
+{% highlight erlang %}
 > eqc_gen:sample(eqc_gen:list(eqc_gen:nat())).
 [7,7,1]
 [6,7,3]
@@ -79,15 +79,15 @@ You can use `eqc_gen:sample/1` for the purpose.
 [8,0]
 [4,4,10,20,0]
 ok
-```
+{% endhighlight %}
 
 This is also useful to verify the sequence of commands that your abstract state
 machine can generate:
 
-```
+{% highlight erlang %}
 > eqc_gen:sample(eqc_statem:commands(my_eqc)).
 > eqc_gen:sample(eqc_statem:parallel_commands(my_eqc)).
-```
+{% endhighlight %}
 
 Where `my_eqc` is the module where your _eqc_statem_ is defined.
 
@@ -101,7 +101,7 @@ to the state, it is always appended at the end of a list, [even if you are a sea
 Erlang developer and it feels a bit unnatural to you](http://www.erlang.org/doc/efficiency_guide/myths.html#id56691).
 This will give you a better shrinking in most cases.
 
-```
+{% highlight erlang %}
 ### DO
 add_next(S, Res, [Pid]) ->
   S#state{pids = S#state.pids ++ [Pid]}
@@ -109,7 +109,7 @@ add_next(S, Res, [Pid]) ->
 ### DON'T
 add_next(S, Res, [Pid]) ->
   S#state{pids = [Pid | S#state.pids]}
-```
+{% endhighlight %}
 
 Don't bother about quadratic complexity here, since you will only run
 this code during tests and you will probably have only a few elements in your state
@@ -137,7 +137,7 @@ want your tests to run forever. So, what's a good value for a timeout?
 Well, since the sequence of command is available in your property, you
 could calculate a timeout value from the sequence of commands itself:
 
-```
+{% highlight erlang %}
 prop_bar() ->
    ?FORALL(Cmds, commands(),
      ?TIMEOUT(my_timeout(Cmds),
@@ -152,7 +152,7 @@ expected_time({call, ?MODULE, op1, _Args}) ->
   2000;
 expected_time({call, ?MODULE, op2, _Args}) ->
   3000.
-```
+{% endhighlight %}
 
 At this point, you should get the idea.
 
@@ -162,7 +162,7 @@ In certain situations, test outcomes are non-deterministic.
 In such cases, the `?SOMETIMES/2` macro can help.
 An extract from the QuickCheck documentation follows.
 
-```
+{% highlight erlang %}
 ?SOMETIMES(N,Prop)
 
 A property which tests Prop repeatedly N times, failing only if all of the
@@ -171,7 +171,7 @@ This is used in situations where test outcomes are non-deterministic,
 to search for test cases that consistently fail.
 A property such as ?FORALL(X,...,?SOMETIMES(10,...)) will find test cases X for
 which the property inside ?SOMETIMES is very likely to fail.
-```
+{% endhighlight %}
 
 ### More compacted FSMs
 
@@ -190,16 +190,16 @@ are meaningful by testing properties that should *not* succeed. You
 can perform negative testing by wrapping a property using the
 `eqc:fails/1` function.
 
-```
+{% highlight erlang %}
 fails(?FORALL(...))
-```
+{% endhighlight %}
 
 ### Testing race conditions
 
 In QuickCheck, going from sequential testing to parallel testing is a snap in most cases.
 As an example, the following property:
 
-```
+{% highlight erlang %}
 prop_registry() ->
   ?FORALL(Cmds, commands(?MODULE),
     begin
@@ -209,11 +209,11 @@ prop_registry() ->
                       aggregate(command_names(Cmds),
                       Res == ok))
     end).
-```
+{% endhighlight %}
 
 Would become:
 
-```
+{% highlight erlang %}
 prop_registry() ->
   ?FORALL(Cmds, parallel_commands(?MODULE),
     begin
@@ -223,7 +223,7 @@ prop_registry() ->
                       aggregate(command_names(Cmds),
                       Res == ok))
     end).
-```
+{% endhighlight %}
 
 You can use _preconditions_ to ensure logical precedence between operations.
 
@@ -246,14 +246,13 @@ produced by the system under test while running QuickCheck. By using
 the following pattern, it will be possible to reply a failing test case and to display
 only relevant logs.
 
-```
+{% highlight erlang %}
 case eqc:quickcheck(Property) of
         true -> true;
         _    -> io:format(user, "Repeating failing test~n", []),
                 true = eqc:check(Prop)
 end.
-```
-
+{% endhighlight %}
 
 As a plus, the `check/2` function can be used without a QuickCheck
 licence, allowing anyone to run tests that a licenced user has
