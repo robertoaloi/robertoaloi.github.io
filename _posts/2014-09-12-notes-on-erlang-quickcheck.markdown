@@ -54,7 +54,7 @@ In QuickCheck two similar functions are available: `elements/1` and
 which one to use.
 
 The main difference between the two functions stands in the input arguments.
-The `elements/1` takes a list of elements as input and it generates an
+The `elements/1` takes a list of terms as input and it generates an
 element from it, whilst `oneof/1` takes a list of generators and it
 picks one of them.
 
