@@ -11,8 +11,6 @@ image       :
 comments    : true
 ---
 
-# Notes on Erlang QuickCheck
-
 A few days ago I had the chance to spend some time with John
 Hughes, one of the creators of the [Erlang Quickcheck](http://www.quviq.com/products/erlang-quickcheck/).
 We looked at some of our APIs and went through some of our QuickCheck models.
@@ -23,7 +21,7 @@ The following notes are listed in a more or less random order
 and they assume that you are already familiar with QuickCheck (_EQC_) and
 QuickCheck abstract state machines.
 
-## Generating sublists
+### Generating sublists
 
 Given a list of items - say, atoms - you want to extract random sublists
 from the original list.
@@ -47,7 +45,7 @@ sublist(L0) ->
   ?LET(L, [{E, eqc_gen:bool()} || E <- L0], [X || {X, false} <- L]).
 ```
 
-## Use `elements/1` or `oneof/1`?
+### Use `elements/1` or `oneof/1`?
 
 In QuickCheck two similar functions are available: `elements/1` and
 `oneof/1`. They look similar at a first glance, so you may wonder which one to use.
@@ -61,7 +59,7 @@ The above is important for how the two functions shrink. `elements/1` shrinks to
 first element of the list, whilst `oneof/1` shrinks towards the _last
 used_ one.
 
-## Verify your generators
+### Verify your generators
 
 Whenever you implement a new generator or even if you simply use one of the built-in
 ones, you may want to verify that the generator works as you expect.
@@ -93,7 +91,7 @@ machine can generate:
 
 Where `my_eqc` is the module where your _eqc_statem_ is defined.
 
-## Think shrinking
+### Think shrinking
 
 The `elements/1` generator shrinks towards the beginning of the list.
 Keep that in mind when implementing your QuickCheck abstract state machine. If
@@ -104,11 +102,11 @@ Erlang developer and it feels a bit unnatural to you](http://www.erlang.org/doc/
 This will give you a better shrinking in most cases.
 
 ```
-## DO
+### DO
 add_next(S, Res, [Pid]) ->
   S#state{pids = S#state.pids ++ [Pid]}
 
-## DON'T
+### DON'T
 add_next(S, Res, [Pid]) ->
   S#state{pids = [Pid | S#state.pids]}
 ```
@@ -117,7 +115,7 @@ Don't bother about quadratic complexity here, since you will only run
 this code during tests and you will probably have only a few elements in your state
 at any given time.
 
-## Live in the Erlang shell
+### Live in the Erlang shell
 
 Sometimes the feedback loop for executing QuickCheck tests can be
 long and/or the way properties are verified can be a bit inflexible. As an example, you may be wrapping your QuickCheck
@@ -127,7 +125,7 @@ When implementing new properties or debugging an abstract state machine, try to 
 the Erlang shell as much as possible. Being able to run `eqc:check/1` on your latest counterexample
 and being able to re-run a property in a matter of seconds after a quick fix will reveal a great win in the long term.
 
-## How long will my commands take?
+### How long will my commands take?
 
 In your QuickCheck abstract state machine, you have operations which can take
 long time and you may want to set a timeout for the entire test suite. You don't
@@ -158,7 +156,7 @@ expected_time({call, ?MODULE, op2, _Args}) ->
 
 At this point, you should get the idea.
 
-## Non derministic test outcomes
+### Non derministic test outcomes
 
 In certain situations, test outcomes are non-deterministic.
 In such cases, the `?SOMETIMES/2` macro can help.
@@ -175,7 +173,7 @@ A property such as ?FORALL(X,...,?SOMETIMES(10,...)) will find test cases X for
 which the property inside ?SOMETIMES is very likely to fail.
 ```
 
-## More compacted FSMs
+### More compacted FSMs
 
 The most recent versions of QuickCheck have a new format for defining
 an abstract state machine, which is more readable and concise and which requires
@@ -184,7 +182,7 @@ find extensive documentation about the new _statem_ format by looking at the
 documentation for the `eqc_group_commands` module. Not easy to find, which is
 why I'm mentioning it here.
 
-## Failing is good
+### Failing is good
 
 Too often your QuickCheck tests pass and your properties are
 successful. In many occasions it's useful to ensure that your tests
@@ -196,7 +194,7 @@ can perform negative testing by wrapping a property using the
 fails(?FORALL(...))
 ```
 
-## Testing race conditions
+### Testing race conditions
 
 In QuickCheck, going from sequential testing to parallel testing is a snap in most cases.
 As an example, the following property:
@@ -229,7 +227,7 @@ prop_registry() ->
 
 You can use _preconditions_ to ensure logical precedence between operations.
 
-## Running on multicore
+### Running on multicore
 
 If you are testing race conditions and you are using `parallel_cmds` as above,
 ensure you are running on a multicore system. Do not underestimate
@@ -238,7 +236,7 @@ in a VM or in a Jenkins slave with limited cores. In such a situation, in fact, 
 scheduler will try as hard as possible to prevent context switches between processes and your
 parallel tests may be less useful than you think.
 
-## About `check/1` and `check/2`
+### About `check/1` and `check/2`
 
 It's possible to test a property for a given case (often the current
 counterexample) by using the `check/1` and `check/2` functions
