@@ -37,9 +37,9 @@ sublist(L0) ->
 {% endhighlight %}
 
 Since the boolean generator shrinks towards the _false_ value, your
-sublist will shrink towards the empty list, which is
-what you want in most cases. If you want to invert this behaviour and
-you want to shrink - or I should say to grow - towards the entire list, you can
+sublist shrinks towards the empty list, which is
+what you want in most cases. If you need to invert this behaviour and
+you want to shrink - or should I say _grow_ - towards the entire list, you can
 simply toggle the _true_ boolean and set it to _false_:
 
 {% highlight erlang %}
@@ -60,12 +60,12 @@ picks one of them.
 
 The above is important for how the two functions shrink. `elements/1`
 shrinks towards the first element of the list, whilst `oneof/1`
-shrinks towards the _last used_ one.
+shrinks towards the _failing_ one.
 
 ### Verify your generators
 
-Whenever you implement a new generator or even if you simply use one
-of the built-in ones, you may want to verify that the generator works
+Whenever you implement a new generator or even if you simply use a
+built-in one, you may want to verify that the generator works
 as you expect. You can use `eqc_gen:sample/1` for the purpose.
 
 {% highlight erlang %}
@@ -97,13 +97,13 @@ Where `my_eqc` is the module where your _eqc_statem_ is defined.
 ### Think shrinking
 
 The `elements/1` generator shrinks towards the beginning of the list.
-Keep that in mind when implementing your QuickCheck abstract state machine. If
-you have a list of elements - say, pids - in your model state and you
+Keep that in mind when implementing your QuickCheck abstract state machines. If
+you keep a list of elements - say, pids - in your model state and you
 plan to use `elements/1` on them, ensure that whenever a new element is added
 to the state, it is always appended at the end of a list, [even if you
 are a seasoned Erlang developer and it feels a bit unnatural to
 you](http://www.erlang.org/doc/efficiency_guide/myths.html#id56691). This
-will give you a better shrinking in most cases.
+will give you better shrinking in most cases.
 
 {% highlight erlang %}
 ### DO
@@ -119,32 +119,35 @@ Don't bother about quadratic complexity here, since you will only run
 this code during tests and you will probably have only a few elements
 in your state at any given time.
 
-### Live in the Erlang shell
+### Living in the Erlang shell
 
-Sometimes the feedback loop for executing QuickCheck tests can be
-long and/or the way properties are verified can be a bit
-inflexible. As an example, you may be wrapping your QuickCheck
+Sometimes the feedback loop for executing QuickCheck tests is
+long and/or the way properties are verified is inflexible. As an
+example, you may be wrapping your QuickCheck
 properties in EUnit suites to get code coverage information, or you
 may run QuickCheck via [rebar](https://github.com/basho/rebar).
 
-When implementing new properties or debugging an abstract state
+When implementing a new property or debugging an abstract state
 machine, try to run QuickCheck from the Erlang shell as much as
 possible. Being able to run `eqc:check/1` on your latest
-counterexample and being able to re-run a property in a matter of
-seconds after a quick fix will reveal a great win in the long term.
+counterexample, to verify the list of generated commands using the
+`sample/1` function (as explained above) and to re-run a
+property in seconds after a quick fix is a great win in the
+long term.
 
 ### How long will my commands take?
 
-In your QuickCheck abstract state machine, you have operations which can take
-long time and you may want to set a timeout for the entire test suite. You don't
-want to set the timeout too small, since you may incur into _occasionaly
+In your QuickCheck abstract state machine, you could have operations which take
+long time, so you may want to set a timeout for the entire test suite. You don't
+want to set the timeout too small, to avoid incurring into _occasionaly
 failing test cases_ (due to the timeout being hit, in case long
 sequences of commands are generated). On the other hand, you don't
 want to set the timeout too long, since you don't want your tests to
 run forever. So, what's a good value for a timeout?
 
 Well, since the sequence of command is available in your property, you
-could calculate a timeout value from the sequence of commands itself:
+could calculate a timeout value from the sequence of commands itself.
+The following snippet should give you a better idea of what I mean here.
 
 {% highlight erlang %}
 prop_bar() ->
@@ -163,12 +166,10 @@ expected_time({call, ?MODULE, op2, _Args}) ->
   3000.
 {% endhighlight %}
 
-At this point, you should get the idea.
-
 ### Non derministic test outcomes
 
-In certain situations, test outcomes are non-deterministic.
-In such cases, the `?SOMETIMES/2` macro can help.
+In certain situations test outcomes are non-deterministic.
+In such cases, have a look to the `?SOMETIMES/2` macro.
 An extract from the QuickCheck documentation follows.
 
 {% highlight erlang %}
@@ -182,13 +183,13 @@ A property such as ?FORALL(X,...,?SOMETIMES(10,...)) will find test cases X for
 which the property inside ?SOMETIMES is very likely to fail.
 {% endhighlight %}
 
-### More compacted FSMs
+### More compacted State Machines
 
 The most recent versions of QuickCheck have a new format for defining
 an abstract state machine, which is more readable and concise and which requires
 much less boilerplate than before. You can
 find extensive documentation about the new _statem_ format by looking at the
-documentation for the `eqc_group_commands` module. Not easy to find, which is
+documentation in the `eqc_group_commands` module. Not easy to find, which is
 why I'm mentioning it here.
 
 ### Failing is good
@@ -248,12 +249,12 @@ and your parallel tests may be less useful than you think.
 
 ### About `check/1` and `check/2`
 
-It's possible to test a property for a given case (often the current
+It's possible to test a property for a given case (usually the current
 counterexample) by using the `check/1` and `check/2` functions
 exported by the `eqc` module. An interesting application of the
 `check` functions is in a system where plenty of log information are
 produced by the system under test while running QuickCheck. By using
-the following pattern, it will be possible to reply a failing test
+the following pattern, it will be possible to replay a failing test
 case and to display only relevant logs.
 
 {% highlight erlang %}
