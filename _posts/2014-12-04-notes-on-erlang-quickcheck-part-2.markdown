@@ -152,7 +152,9 @@ are serialized through the application controller**. In other words,
 `terminate/1` callback function in a gen_server which traps exits**,
 since in case of application termination the application controller is
 busy shutting down the application itself and cannot handle other
-requests, causing a deadlock.
+requests, causing a deadlock. A minimal example showing the _deadlock_
+can be found in the following
+[gist](https://gist.github.com/robertoaloi/249c6bb9e607fb53d8b6).
 
 Even if the `terminate/1` was covered by unit tests, the issue never
 emerged since in that case the `terminate` function was not called via
