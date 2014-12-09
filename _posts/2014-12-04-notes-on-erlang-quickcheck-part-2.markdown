@@ -18,14 +18,18 @@ As usual, it has been an impressive learning experience, so I decided - [once
 again](http://roberto-aloi.com/erlang/notes-on-erlang-quickcheck/) -
 to share some of the highlights from our discussions.
 
-We modeled one of our internal Erlang applications, of which I cannot
-unfortunately say too much. The application was relatively small
+We modeled one of our internal Erlang applications, using a Quickcheck
+_statem_. The application was relatively small
 (i.e. <1000 LOC), it offered a pretty straightforward API and its code
-was already covered by unit tests, with a code coverage > 90%.
+was already covered by a fair amount of unit tests, with code coverage
+surpassing 90%.
 
-We used a Quickcheck _statem_ to model the behaviour of the
-application under exam. Quickcheck managed to find 5 or 6 corner cases
-which caused the tests
+As already happened to
+[someone else](http://basho.com/quickchecking-poolboy-for-fun-and-profit/),
+I didn't expect to find too many bugs, if not in the Quickcheck model
+itself.
+Once again, Quickcheck proved me to be very wrong, finding five or six
+corner cases which caused the tests
 to fail. It also revealed some interesting behaviour for the
 application which, even if ineherently correct, was not clearly documented.
 
@@ -56,7 +60,7 @@ it:
     ok
 
 If you want to exclude the zero from the possible outcomes, you can
-use something like:
+define something like:
 
     non_zero_nat() ->
         ?SUCHTHAT(N, eqc_gen:nat(), N > 0).
@@ -129,7 +133,7 @@ At this point the tests passed, but they were taking very long time,
 which was a bit
 surprising. The `terminate/2` function, containing the cleanup
 code, seemed harmless at a first glance. Nonethless, the `gen_server`
-process was hanging somewhere, so that the the supervisor had to kill
+process was hanging somewhere, so that the supervisor had to kill
 it after the
 configured `shutdown` time, which was set to _5_ seconds.
 
@@ -148,7 +152,9 @@ are serialized through the application controller**. In other words,
 `terminate/1` callback function in a gen_server which traps exits**,
 since in case of application termination the application controller is
 busy shutting down the application itself and cannot handle other
-requests, causing a deadlock.
+requests, causing a deadlock. A minimal example showing the _deadlock_
+can be found in the following
+[gist](https://gist.github.com/robertoaloi/249c6bb9e607fb53d8b6).
 
 Even if the `terminate/1` was covered by unit tests, the issue never
 emerged since in that case the `terminate` function was not called via
@@ -230,7 +236,7 @@ doesn't take longer than a certain amount of time. A simple way to
 check this is to use the
 [`timer:tc/1`](http://www.erlang.org/doc/man/timer.html#tc-1)
 function. There are a couple of important
-considerations to be done about this function. For example, it is advised to run
+considerations to be made about this function. For example, it is advised to run
 it from a newly spawned process and to call `erlang:garbage_collect/1`
 just before using it, to lower the possibilities the Erlang garbage collector
 starts its job during the measurement. Nonethless, if you don't need
@@ -260,29 +266,6 @@ Where:
 As a plus, you may want collect some statistics about times (which are
 now part of the command results) in your property, via the
 `aggregate/2,3` and `collect/2,3` functions.
-
-### The `adapt/2` Callback Function
-
-In a Quickcheck _statem_, an optional callback function exists. To
-tell the truth, the callback is a bit _hidden_ since it is documented in the
-`eqc_statem` module but not in the `eqc_group_commands`, which is the
-one that I use most of the times.
-
-The `adapt/2` function is used during shrinking and sometimes can be
-extremely helfpul. Whenever a precondition does not hold, the callback
-function is called to try and _repair_ a call before descarding
-it. Any crash inside the `adapt/2` is interpreted as an
-impossible adaptation. If the callback is executed successfully, the
-precondition is then re-checked to check whether the changes made were
-sufficient. Sometimes, this little function can improve shrinking
-dramatically and it's worth a bit of experimentation.
-
-Assuming you have a _start_ command for your application, which takes
-a list of items as input, your `adapt/2` function may look like this:
-
-    start_adapt(S, [Items0]) ->
-      Items = do_some_magic(S, Items0),
-      {call, ?MODULE, start, [Items]}.
 
 ### Dealing with race conditions
 
