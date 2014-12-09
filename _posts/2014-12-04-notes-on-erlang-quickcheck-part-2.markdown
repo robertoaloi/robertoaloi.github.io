@@ -18,14 +18,18 @@ As usual, it has been an impressive learning experience, so I decided - [once
 again](http://roberto-aloi.com/erlang/notes-on-erlang-quickcheck/) -
 to share some of the highlights from our discussions.
 
-We modeled one of our internal Erlang applications, of which I cannot
-unfortunately say too much. The application was relatively small
+We modeled one of our internal Erlang applications, using a Quickcheck
+_statem_. The application was relatively small
 (i.e. <1000 LOC), it offered a pretty straightforward API and its code
-was already covered by unit tests, with a code coverage > 90%.
+was already covered by a fair amount of unit tests, with code coverage
+surpassing 90%.
 
-We used a Quickcheck _statem_ to model the behaviour of the
-application under exam. Quickcheck managed to find 5 or 6 corner cases
-which caused the tests
+As already happened to
+[someone else](http://basho.com/quickchecking-poolboy-for-fun-and-profit/),
+I didn't expect to find too many bugs, if not in the Quickcheck model
+itself.
+Once again, Quickcheck proved me to be very wrong, finding five or six
+corner cases which caused the tests
 to fail. It also revealed some interesting behaviour for the
 application which, even if ineherently correct, was not clearly documented.
 
@@ -56,7 +60,7 @@ it:
     ok
 
 If you want to exclude the zero from the possible outcomes, you can
-use something like:
+define something like:
 
     non_zero_nat() ->
         ?SUCHTHAT(N, eqc_gen:nat(), N > 0).
