@@ -265,29 +265,6 @@ As a plus, you may want collect some statistics about times (which are
 now part of the command results) in your property, via the
 `aggregate/2,3` and `collect/2,3` functions.
 
-### The `adapt/2` Callback Function
-
-In a Quickcheck _statem_, an optional callback function exists. To
-tell the truth, the callback is a bit _hidden_ since it is documented in the
-`eqc_statem` module but not in the `eqc_group_commands`, which is the
-one that I use most of the times.
-
-The `adapt/2` function is used during shrinking and sometimes can be
-extremely helfpul. Whenever a precondition does not hold, the callback
-function is called to try and _repair_ a call before descarding
-it. Any crash inside the `adapt/2` is interpreted as an
-impossible adaptation. If the callback is executed successfully, the
-precondition is then re-checked to check whether the changes made were
-sufficient. Sometimes, this little function can improve shrinking
-dramatically and it's worth a bit of experimentation.
-
-Assuming you have a _start_ command for your application, which takes
-a list of items as input, your `adapt/2` function may look like this:
-
-    start_adapt(S, [Items0]) ->
-      Items = do_some_magic(S, Items0),
-      {call, ?MODULE, start, [Items]}.
-
 ### Dealing with race conditions
 
 In our case, it proved to be really hard to provoke the race condition
