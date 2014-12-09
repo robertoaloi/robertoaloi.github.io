@@ -133,7 +133,7 @@ At this point the tests passed, but they were taking very long time,
 which was a bit
 surprising. The `terminate/2` function, containing the cleanup
 code, seemed harmless at a first glance. Nonethless, the `gen_server`
-process was hanging somewhere, so that the the supervisor had to kill
+process was hanging somewhere, so that the supervisor had to kill
 it after the
 configured `shutdown` time, which was set to _5_ seconds.
 
@@ -234,7 +234,7 @@ doesn't take longer than a certain amount of time. A simple way to
 check this is to use the
 [`timer:tc/1`](http://www.erlang.org/doc/man/timer.html#tc-1)
 function. There are a couple of important
-considerations to be done about this function. For example, it is advised to run
+considerations to be made about this function. For example, it is advised to run
 it from a newly spawned process and to call `erlang:garbage_collect/1`
 just before using it, to lower the possibilities the Erlang garbage collector
 starts its job during the measurement. Nonethless, if you don't need
