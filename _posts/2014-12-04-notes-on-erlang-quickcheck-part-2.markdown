@@ -139,7 +139,7 @@ configured `shutdown` time, which was set to _5_ seconds.
 
 A second look at the cleanup function pointed to a suspicious
 `application:set_env/3` call. The server was trying to set an
-application environment variable before dying. I rapid exploration of
+application environment variable before dying. A rapid exploration of
 the OTP for the
 [application_controller](https://github.com/erlang/otp/blob/OTP-17.3.4/lib/kernel/src/application_controller.erl#L464)
 module revealed the mystery.
@@ -178,7 +178,7 @@ pretty-printing by using `eqc_gen:with_parameters/3` and enabling the
       begin
         {H, S, Res} = run_commands(?MODULE, Cmds),
         with_parameters(
-          [{show_states, false}],
+          [{show_states, true}],
           pretty_commands(
             ...
 
