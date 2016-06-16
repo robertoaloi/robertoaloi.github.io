@@ -31,7 +31,7 @@ Buddhism claims to have answers to many of the problems in modern materialistic 
 
 ## Who is Joe (Siddhartha) Armstrong?
 
-In 1995, Joe (Siddhartha) Armstrong realized that wealth and luxury did not guarantee happiness, so he explored the different programming languages and philosophies of the day, to find the key to development happiness. After years of study and meditation he finally found *the path* and was enlightened. After enlightenment, Joe spent the rest of his life preaching the principles of Erlang, also known as *The Truth*.
+In 1995, Joe (Siddhartha) Armstrong realized that wealth and luxury did not guarantee happiness, so he explored the different programming languages and philosophies of the day, to find the key to development happiness. After years of study and meditation he finally found *the path* and was enlightened. After enlightenment, Joe spent the rest of his life preaching the principles of Erlang, also known as *The Truth*, mostly at tech conferences.
 
 ## Is Joe Armstrong a God?
 
