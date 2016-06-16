@@ -11,7 +11,7 @@ image       :
 comments    : true
 ---
 
-If Software Development was Religion, Erlang would have been Buddhism. And I guess Joe Armstrong would have been Siddartha.
+If Software Development was Religion, Erlang would have been Buddhism. And I guess Joe Armstrong would have been Siddhartha.
 
 Let me explain.
 
@@ -29,9 +29,9 @@ Buddhism explains a purpose to life [...] and it provides a code of practice or 
 
 Buddhism claims to have answers to many of the problems in modern materialistic societies. Erlang has answers to many of the problems in modern software: scalability, fault tolerance, availability.
 
-## Who is Joe (Siddartha) Armstrong?
+## Who is Joe (Siddhartha) Armstrong?
 
-In 1995, Joe (Siddartha) Armstrong realized that wealth and luxury did not guarantee happiness, so he explored the different programming languages and philosophies of the day, to find the key to development happiness. After years of study and meditation he finally found *the path* and was enlightened. After enlightenment, Joe spent the rest of his life preaching the principles of Erlang, also known as *The Truth*.
+In 1995, Joe (Siddhartha) Armstrong realized that wealth and luxury did not guarantee happiness, so he explored the different programming languages and philosophies of the day, to find the key to development happiness. After years of study and meditation he finally found *the path* and was enlightened. After enlightenment, Joe spent the rest of his life preaching the principles of Erlang, also known as *The Truth*.
 
 ## Is Joe Armstrong a God?
 
