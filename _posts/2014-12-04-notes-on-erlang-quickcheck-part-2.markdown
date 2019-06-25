@@ -15,7 +15,7 @@ Yesterday I had the pleasure of spending
 a few extra hours with
 [John Hughes](http://www.cse.chalmers.se/~rjmh/).
 As usual, it has been an impressive learning experience, so I decided - [once
-again](http://roberto-aloi.com/erlang/notes-on-erlang-quickcheck/) -
+again](https://robertoaloi.github.io/erlang/notes-on-erlang-quickcheck/) -
 to share some of the highlights from our discussions.
 
 We modeled one of our internal Erlang applications, using a Quickcheck
